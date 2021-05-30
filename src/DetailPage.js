@@ -27,20 +27,24 @@ export default class DetailPage extends React.Component {
             if (mobileNumber.length >= 10) {
                 if (!this.validateNumber(mobileNumber)) {
                     document.getElementById('txtMobileNumber').style.border = '1px solid red';
+                    document.getElementById('lblError').innerHTML = 'Please enter valid number';
                     this.setState({ disabledButton: true })
                 }
                 else {
                     document.getElementById('txtMobileNumber').style.border = '';
+                    document.getElementById('lblError').innerHTML = '';
                     this.setState({ disabledButton: false })
                 }
             }
             else {
                 document.getElementById('txtMobileNumber').style.border = '';
+                document.getElementById('lblError').innerHTML = '';
                 this.setState({ disabledButton: true })
             }
         }
         else {
             document.getElementById('txtMobileNumber').style.border = '';
+            document.getElementById('lblError').innerHTML = '';
             this.setState({ enableButton: true })
         }
     }
@@ -70,7 +74,7 @@ export default class DetailPage extends React.Component {
                     <input className="form-control" type='text' id='txtMobileNumber' value={mobileNumber} onChange={this.handleChange} onKeyUp={this.onKeyupChangeNumber} maxLength='10'
                         placeholder='Enter Mobile Number' onKeyPress={this.isNumber} onPaste={this.handleChange}/>
                 </div>
-                <label></label>
+                <div><label id="lblError"></label> </div>
                 <div className="button-cont">
                     <button className={disabledButton ? 'btn btn-disabled' : 'btn btn-primary'} disabled={disabledButton} onClick={() => this.props.saveDetails(mobileNumber)}>{'Wow! Get my Patym Card >'}</button>
                 </div>
